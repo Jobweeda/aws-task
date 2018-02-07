@@ -37,6 +37,26 @@
         "Properties": {
           "VpcId": { "Ref": "MyVPC" }
         }
+      },
+      "Route": {
+        "Type": "AWS::EC2::Route",
+        "DependsOn": "GatewayToInternet",
+        "Properties": {
+          "RouteTableId": { "Ref": "RouteTable" },
+          "DestinationCidrBlock": "0.0.0.0/0",
+          "GatewayId": { "Ref": "MyInternetGateway"}
+        }
+      },
+      "GatewayToInternet": {
+        "Type": "AWS::EC2::VPCGatewayAttachment",
+        "Properties": {
+          "InternetGatewayId": { "Ref": "MyInternetGateway" },
+          "VpcId": { "Ref": "MyVPC" }
+        }
+      },
+      "MyInternetGateway": {
+        "Type": "AWS::EC2::InternetGateway",
+        "Properties": {}
       }
    }
 }
