@@ -31,6 +31,12 @@
           "VpcId": { "Ref": "MyVPC" },
           "CidrBlock": "10.0.32.0/20"
         }
+      },
+      "RouteTable": {
+        "Type": "AWS::EC2::RouteTable",
+        "Properties": {
+          "VpcId": { "Ref": "MyVPC" }
+        }
       }
    }
 }
