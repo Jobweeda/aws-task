@@ -65,6 +65,19 @@
           "InstanceType": "t2.micro",
           "SubnetId": { "Ref": "Subnet1" }
         }
+      },
+        "MyASG": {
+          "Type": "AWS::AutoScaling::AutoScalingGroup",
+          "Properties": {
+            "MinSize": "2",
+            "MaxSize": "10",
+            "InstanceId": { "Ref": "MyEC2Instance" },
+            "VPCZoneIdentifier": [
+              { "Ref": "Subnet1" },
+              { "Ref": "Subnet2" },
+              { "Ref": "Subnet3" }
+            ]
+          }
+        }
       }
    }
-}
