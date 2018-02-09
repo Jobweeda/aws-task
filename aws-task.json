@@ -78,6 +78,14 @@
               { "Ref": "Subnet3" }
             ]
           }
+        },
+        "MyLaunchConfig": {
+          "Type": "AWS::AutoScaling::LaunchConfiguration",
+          "Properties": {
+            "ImageId" : "ami-33605456",
+            "InstanceType": "t2.micro",
+            "SecurityGroups": { "Ref": "MySecurityGroup"}
+          }
         }
       }
    }
