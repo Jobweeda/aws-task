@@ -84,7 +84,34 @@
           "Properties": {
             "ImageId" : "ami-33605456",
             "InstanceType": "t2.micro",
-            "SecurityGroups": { "Ref": "MySecurityGroup"}
+            "SecurityGroups": [{ "Ref": "MySecurityGroup" }],
+            "InstanceId": { "Ref": "MyEC2Instance" }
+          }
+        },
+        "MySecurityGroup": {
+          "Type": "AWS::EC2::SecurityGroup",
+          "Properties": {
+            "GroupDescription": "Security group",
+            "VpcId": { "Ref": "MyVPC" },
+            "SecurityGroupIngress": [{
+              "IpProtocol": "tcp",
+              "FromPort": "22",
+              "ToPort": "22",
+              "CidrIp": "185.40.99.134/32"
+              }]
+          }
+        },
+        "MyLCASG": {
+          "Type": "AWS::AutoScaling::AutoScalingGroup",
+          "Properties": {
+            "MinSize": "1",
+            "MaxSize": "2",
+            "LaunchConfigurationName": { "Ref": "MyLaunchConfig"},
+            "VPCZoneIdentifier": [
+              { "Ref": "Subnet1" },
+              { "Ref": "Subnet2" },
+              { "Ref": "Subnet3" }
+            ]
           }
         }
       }
